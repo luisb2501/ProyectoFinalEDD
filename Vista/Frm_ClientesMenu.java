@@ -5,11 +5,18 @@
  */
 package Vista;
 
+import Controlador.ClienteDAO;
+import Controlador.listaSimple.ListaSimple;
+import Modelo.Persona;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Jonathan Javier
  */
 public class Frm_ClientesMenu extends javax.swing.JFrame {
+
+    ClienteDAO clienteD = new ClienteDAO("Datos");
 
     /**
      * Creates new form Frm_ClientesMenu
@@ -29,41 +36,54 @@ public class Frm_ClientesMenu extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        botonConsultarSaldo = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        botonRegresar = new javax.swing.JButton();
+        botonConsultar = new javax.swing.JButton();
+        botonContratar = new javax.swing.JButton();
+        botonCancelar = new javax.swing.JButton();
+        botonPagos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("SELECCIONE UNA OPCIÓN");
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/iconos/Contratar.png"))); // NOI18N
-
         jLabel3.setText("Consultar Planes Vigentes");
-
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/iconos/PlanesVigentes.png"))); // NOI18N
 
         jLabel5.setText("Contratar un Plan");
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/iconos/Pagos.png"))); // NOI18N
-
         jLabel7.setText("Cancelar Contrato");
-
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/iconos/Cancelar.png"))); // NOI18N
 
         jLabel9.setText("Pagos Proximos");
 
-        jButton1.setText("Consultar Saldo de la cuenta");
+        botonConsultarSaldo.setText("Consultar Saldo de la cuenta");
+        botonConsultarSaldo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonConsultarSaldoActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Modificar Datos Personales");
+
+        botonRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/iconos/atras.png"))); // NOI18N
+        botonRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonRegresarActionPerformed(evt);
+            }
+        });
+
+        botonConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/iconos/PlanesVigentes.png"))); // NOI18N
+
+        botonContratar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/iconos/Contratar.png"))); // NOI18N
+
+        botonCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/iconos/Cancelar.png"))); // NOI18N
+
+        botonPagos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Vista/iconos/Pagos.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -74,65 +94,73 @@ public class Frm_ClientesMenu extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(216, 216, 216)
                         .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(224, 224, 224)
-                            .addComponent(jLabel2)
-                            .addGap(44, 44, 44)
-                            .addComponent(jLabel8))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addGap(33, 33, 33)
-                            .addComponent(jLabel3)
-                            .addGap(57, 57, 57)
-                            .addComponent(jLabel5)
-                            .addGap(75, 75, 75)
-                            .addComponent(jLabel7))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(jLabel3))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(58, 58, 58)
+                                .addComponent(botonConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(73, 73, 73)
+                                .addComponent(jLabel5)
+                                .addGap(74, 74, 74)
+                                .addComponent(jLabel7))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(57, 57, 57)
+                                .addComponent(botonContratar, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(43, 43, 43)
+                                .addComponent(botonCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(botonPagos, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel9)
-                        .addGap(19, 19, 19)))
-                .addGap(52, 52, 52))
+                        .addGap(70, 70, 70))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botonRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(110, 110, 110)
-                .addComponent(jButton1)
+                .addComponent(botonConsultarSaldo)
                 .addGap(130, 130, 130)
                 .addComponent(jButton2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(43, 43, 43)
-                    .addComponent(jLabel4)
-                    .addContainerGap(586, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(57, 57, 57)
+                .addGap(48, 48, 48)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel8))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(jLabel5))
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel9))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(botonConsultar)
+                            .addComponent(botonContratar)
+                            .addComponent(botonCancelar))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel5))
+                            .addComponent(jLabel7)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(botonPagos)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel9)))
                 .addGap(76, 76, 76)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(botonConsultarSaldo)
                     .addComponent(jButton2))
-                .addContainerGap(25, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addGap(99, 99, 99)
-                    .addComponent(jLabel4)
-                    .addContainerGap(214, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(botonRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -148,6 +176,25 @@ public class Frm_ClientesMenu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegresarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_botonRegresarActionPerformed
+
+    private void botonConsultarSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsultarSaldoActionPerformed
+        // TODO add your handling code here:
+        String cedula = JOptionPane.showInputDialog("Ingrese su numero de cedula");
+        ListaSimple lista = clienteD.listar();
+        for (int i = 0; i <= lista.tamano(); i++) {
+            if (cedula.equals(((Persona) lista.obtenerPorPosicion(i)).getCedula())) {
+                JOptionPane.showMessageDialog(null, "Su saldo es de: " + ((Persona)lista.obtenerPorPosicion(i)).getCuenta().getSaldoCuenta() + "USD");
+            } else {
+                JOptionPane.showMessageDialog(null, "Cedula Incorrecta");
+            }
+        }
+
+    }//GEN-LAST:event_botonConsultarSaldoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,16 +232,17 @@ public class Frm_ClientesMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton botonCancelar;
+    private javax.swing.JButton botonConsultar;
+    private javax.swing.JButton botonConsultarSaldo;
+    private javax.swing.JButton botonContratar;
+    private javax.swing.JButton botonPagos;
+    private javax.swing.JButton botonRegresar;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

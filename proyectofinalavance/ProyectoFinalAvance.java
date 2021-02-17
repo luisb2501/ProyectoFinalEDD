@@ -5,6 +5,8 @@
  */
 package proyectofinalavance;
 
+import Vista.Frm_Inicio;
+
 /**
  *
  * @author luisb250
@@ -16,6 +18,9 @@ public class ProyectoFinalAvance {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Frm_Inicio inicio = new Frm_Inicio();
+        inicio.setVisible(true);
+        
     }
     
 }
